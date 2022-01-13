@@ -3,8 +3,16 @@ using Distributions
 import BLPDemand
 import Dialysis
 
-include(joinpath(pkgdir(BLPDemand), "test", "runtests.jl"))
-include(joinpath(pkgdir(Dialysis), "test", "runtests.jl"))
+try
+  include(joinpath(pkgdir(BLPDemand), "test", "runtests.jl"))
+catch e
+  println("Error in BLPDemand tests, but continuing anyway")
+end
+try
+  include(joinpath(pkgdir(Dialysis), "test", "runtests.jl"))
+catch e
+  println("Error in Dialysis tests, but continuing anyway")
+end
 
 mu = 0.;
 sigma = 1.0;

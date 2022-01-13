@@ -240,7 +240,7 @@ version = "0.4.0"
 
 [[deps.Dialysis]]
 deps = ["CSV", "DataFrames", "Distributions", "FixedEffectModels", "ForwardDiff", "LinearAlgebra", "ShiftedArrays", "Statistics", "ZipFile"]
-git-tree-sha1 = "dd990a6e79109fec842ca9e4d1cabfbef9df8f10"
+git-tree-sha1 = "1790250d8b1ec6ed6b776ed3130f7a9a0d7439c5"
 repo-rev = "master"
 repo-url = "https://github.com/UBCECON567/Dialysis"
 uuid = "9b71aec8-1451-11e9-12ed-579ec60579c4"
@@ -588,10 +588,10 @@ uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
 version = "2.1.0+0"
 
 [[deps.JuMP]]
-deps = ["Calculus", "DataStructures", "ForwardDiff", "JSON", "LinearAlgebra", "MathOptInterface", "MutableArithmetics", "NaNMath", "Random", "SparseArrays", "Statistics"]
-git-tree-sha1 = "57c17a221a55f81890aabf00f478886859e25eaf"
+deps = ["Calculus", "DataStructures", "ForwardDiff", "JSON", "LinearAlgebra", "MathOptInterface", "MutableArithmetics", "NaNMath", "Printf", "Random", "SparseArrays", "SpecialFunctions", "Statistics"]
+git-tree-sha1 = "4358b7cbf2db36596bdbbe3becc6b9d87e4eb8f5"
 uuid = "4076af6c-e467-56ae-b986-b466b2749572"
-version = "0.21.5"
+version = "0.21.10"
 
 [[deps.JuliaInterpreter]]
 deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
@@ -1123,9 +1123,9 @@ uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
 [[deps.SpecialFunctions]]
 deps = ["ChainRulesCore", "IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
-git-tree-sha1 = "e08890d19787ec25029113e88c34ec20cac1c91e"
+git-tree-sha1 = "f0bccf98e16759818ffc5d97ac3ebf87eb950150"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
-version = "2.0.0"
+version = "1.8.1"
 
 [[deps.Static]]
 deps = ["IfElse"]
