@@ -1,2 +1,2 @@
 # juliabinder
-Environment for running Pluto and Neptune on mybinder.org
+Environment for running Pluto on mybinder.org
