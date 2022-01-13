@@ -3,11 +3,11 @@ using Distributions
 import BLPDemand
 import Dialysis
 
-try
-  include(joinpath(pkgdir(BLPDemand), "test", "runtests.jl"))
-catch e
-  println("Error in BLPDemand tests, but continuing anyway")
-end
+#try
+#  include(joinpath(pkgdir(BLPDemand), "test", "runtests.jl"))
+#catch e
+#  println("Error in BLPDemand tests, but continuing anyway")
+#end
 try
   include(joinpath(pkgdir(Dialysis), "test", "runtests.jl"))
 catch e
