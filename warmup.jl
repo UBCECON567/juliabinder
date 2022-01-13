@@ -1,4 +1,4 @@
-using StatsPlotsu
+using StatsPlots
 using Distributions
 import BLPDemand
 import Dialysis
