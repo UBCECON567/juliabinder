@@ -16,7 +16,7 @@ COPY --chown=${NB_USER}:users ./runpluto.sh ./runpluto.sh
 COPY --chown=${NB_USER}:users ./Project.toml ./Project.toml
 COPY --chown=${NB_USER}:users ./Manifest.toml ./Manifest.toml
 
-COPY --chown=${NB_USER}:users ./warmup.jl ./warmup.jl
+COPY --chown=${NB_USER}:users ./combined_trace.jl ./combined_trace.jl
 COPY --chown=${NB_USER}:users ./create_sysimage.jl ./create_sysimage.jl
 
 ENV USER_HOME_DIR /home/${NB_USER}
