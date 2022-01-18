@@ -30,9 +30,11 @@ USER root
 RUN apt-get update && \
     apt-get install -y --no-install-recommends build-essential && \
         apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN julia create_sysimage.jl
 
 USER ${NB_USER}
+
+RUN julia --project=${USER_HOME_DIR} create_sysimage.jl
+RUN julia -J${USER_HOME_DIR}/sysimage.so --project=${USER_HOME_DIR} -e "using Pluto"
 
 RUN jupyter labextension install @jupyterlab/server-proxy && \
     jupyter lab build && \
