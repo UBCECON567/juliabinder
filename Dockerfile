@@ -8,9 +8,9 @@ RUN pip install --no-cache --upgrade pip && \
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget && \
+    apt-get install -y --no-install-recommends build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-#    apt-get install -y --no-install-recommends build-essential && \
 #    apt-get install -y --no-install-recommends npm nodejs && \
 
 USER ${NB_USER}
