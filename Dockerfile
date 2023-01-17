@@ -24,7 +24,8 @@ USER root
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget && \
     apt-get install -y --no-install-recommends build-essential && \
-        apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends npm nodejs-legacy && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.5-linux-x86_64.tar.gz && \
