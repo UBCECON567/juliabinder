@@ -1,23 +1,10 @@
-FROM python:3.10-slim-bullseye
+FROM jupyter/base-notebook:latest
 
-# create user with a home directory
-ARG NB_USER
-ARG NB_UID
-ENV USER ${NB_USER}
-ENV HOME /home/${NB_USER}
-
-RUN adduser --disabled-password \
-    --gecos "Default user" \
-    --uid ${NB_UID} \
-    ${NB_USER}
-WORKDIR ${HOME}
-USER ${USER}
-
-# install the notebook package
+# downgrade jupyter-server
 USER root
 
 RUN pip install --no-cache --upgrade pip && \
-    pip install --no-cache notebook jupyter jupyterlab jupyterhub 'jupyter-server<2.0.0'
+    pip install --no-cache jupyter-server 'jupyter-server<2.0.0'
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget && \
@@ -36,12 +23,13 @@ COPY --chown=${NB_USER}:users ./Manifest.toml ./Manifest.toml
 COPY --chown=${NB_USER}:users ./combined_trace.jl ./combined_trace.jl
 COPY --chown=${NB_USER}:users ./create_sysimage.jl ./create_sysimage.jl
 
-USER root
 RUN jupyter labextension install @jupyterlab/server-proxy && \
     jupyter lab build && \
     jupyter lab clean && \
     pip install . --no-cache-dir && \
     rm -rf ~/.cache
+
+USER root
 
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.5-linux-x86_64.tar.gz && \
     tar -xvzf julia-1.8.5-linux-x86_64.tar.gz && \
