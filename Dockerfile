@@ -1,4 +1,23 @@
-FROM jupyter/base-notebook:python-3.9.7 #jupyter/base-notebook:latest
+FROM python:3.10-slim-bullseye
+# install the notebook package
+RUN pip install --no-cache --upgrade pip && \
+    pip install --no-cache notebook jupyter jupyterlab jupyterhub 'jupyter-server<2.0.0'
+
+# create user with a home directory
+ARG NB_USER
+ARG NB_UID
+ENV USER ${NB_USER}
+ENV HOME /home/${NB_USER}
+
+RUN adduser --disabled-password \
+    --gecos "Default user" \
+    --uid ${NB_UID} \
+    ${NB_USER}
+WORKDIR ${HOME}
+USER ${USER}
+
+##############
+#FROM jupyter/base-notebook:python-3.9.7 #jupyter/base-notebook:latest
 
 USER root
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.5-linux-x86_64.tar.gz && \
@@ -6,6 +25,8 @@ RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.5-linux-
     mv julia-1.8.5 /opt/ && \
     ln -s /opt/julia-1.8.5/bin/julia /usr/local/bin/julia && \
     rm julia-1.8.5-linux-x86_64.tar.gz
+
+# python -m pip --no-cache-dir install jupyter jupyterlab jupyterhub 'jupyter-server<2.0.0' && \
 
 USER ${NB_USER}
 
