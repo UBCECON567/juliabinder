@@ -24,7 +24,7 @@ ENV JULIA_PROJECT ${USER_HOME_DIR}
 ENV JULIA_DEPOT_PATH ${USER_HOME_DIR}/.julia
 WORKDIR ${USER_HOME_DIR}
 
-RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate();"
+RUN julia -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate(); Pkg.precompile()"
 
 USER root
 RUN apt-get update && \
@@ -33,8 +33,9 @@ RUN apt-get update && \
 
 USER ${NB_USER}
 
-RUN julia --project=${USER_HOME_DIR} create_sysimage.jl
-RUN julia -J${USER_HOME_DIR}/sysimage.so --project=${USER_HOME_DIR} -e "using Pluto"
+#RUN julia --project=${USER_HOME_DIR} create_sysimage.jl
+#RUN julia -J${USER_HOME_DIR}/sysimage.so --project=${USER_HOME_DIR} -e "using Pluto"
+RUN julia --project=${USER_HOME_DIR} -e "using Pluto"
 
 RUN jupyter labextension install @jupyterlab/server-proxy && \
     jupyter lab build && \
