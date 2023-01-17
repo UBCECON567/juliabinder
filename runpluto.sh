@@ -22,5 +22,4 @@ Pluto.run(
 )"
 echo ${command}
 
-#julia --sysimage="/home/jovyan/sysimage.so" --project="/home/jovyan" --optimize=0 -e "${command}"
-julia --project="/home/jovyan" --optimize=0 -e "${command}"
+julia --sysimage="/home/jovyan/sysimage.so" --project="/home/jovyan" --optimize=0 -e "${command}"

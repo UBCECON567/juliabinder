@@ -8,9 +8,10 @@ RUN pip install --no-cache --upgrade pip && \
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget && \
-    apt-get install -y --no-install-recommends build-essential && \
-    apt-get install -y --no-install-recommends npm nodejs && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+#    apt-get install -y --no-install-recommends build-essential && \
+#    apt-get install -y --no-install-recommends npm nodejs && \
 
 USER ${NB_USER}
 
@@ -44,8 +45,8 @@ ENV JULIA_PROJECT ${USER_HOME_DIR}
 ENV JULIA_DEPOT_PATH ${USER_HOME_DIR}/.julia
 WORKDIR ${USER_HOME_DIR}
 
-#RUN julia --project=${USER_HOME_DIR} -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate(); Pkg.precompile()"
+RUN julia --project=${USER_HOME_DIR} -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate(); Pkg.precompile()"
 
-#RUN julia --project=${USER_HOME_DIR} create_sysimage.jl
-#RUN julia -J${USER_HOME_DIR}/sysimage.so --project=${USER_HOME_DIR} -e "import Pkg; Pkg.precompile()"
-#RUN julia --project=${USER_HOME_DIR} -e "import Pkg; Pkg.precompile()"
+RUN julia --project=${USER_HOME_DIR} create_sysimage.jl
+RUN julia -J${USER_HOME_DIR}/sysimage.so --project=${USER_HOME_DIR} -e "import Pkg; Pkg.precompile()"
+RUN julia --project=${USER_HOME_DIR} -e "import Pkg; Pkg.precompile()"
