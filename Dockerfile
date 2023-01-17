@@ -14,20 +14,16 @@ WORKDIR ${HOME}
 USER ${USER}
 
 # install the notebook package
+USER root
+
 RUN pip install --no-cache --upgrade pip && \
     pip install --no-cache notebook jupyter jupyterlab jupyterhub 'jupyter-server<2.0.0'
-
-##############
-#FROM jupyter/base-notebook:python-3.9.7 #jupyter/base-notebook:latest
-
-USER root
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget && \
     apt-get install -y --no-install-recommends build-essential && \
     apt-get install -y --no-install-recommends npm nodejs && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
-# python -m pip --no-cache-dir install jupyter jupyterlab jupyterhub 'jupyter-server<2.0.0' && \
 
 USER ${NB_USER}
 
@@ -37,7 +33,6 @@ COPY --chown=${NB_USER}:users ./setup.py ./setup.py
 COPY --chown=${NB_USER}:users ./runpluto.sh ./runpluto.sh
 COPY --chown=${NB_USER}:users ./Project.toml ./Project.toml
 COPY --chown=${NB_USER}:users ./Manifest.toml ./Manifest.toml
-
 COPY --chown=${NB_USER}:users ./combined_trace.jl ./combined_trace.jl
 COPY --chown=${NB_USER}:users ./create_sysimage.jl ./create_sysimage.jl
 
