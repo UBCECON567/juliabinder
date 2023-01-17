@@ -20,6 +20,13 @@ USER ${USER}
 #FROM jupyter/base-notebook:python-3.9.7 #jupyter/base-notebook:latest
 
 USER root
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends wget && \
+    apt-get install -y --no-install-recommends build-essential && \
+        apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.5-linux-x86_64.tar.gz && \
     tar -xvzf julia-1.8.5-linux-x86_64.tar.gz && \
     mv julia-1.8.5 /opt/ && \
@@ -46,11 +53,6 @@ ENV JULIA_DEPOT_PATH ${USER_HOME_DIR}/.julia
 WORKDIR ${USER_HOME_DIR}
 
 RUN julia --project=${USER_HOME_DIR} -e "import Pkg; Pkg.Registry.update(); Pkg.instantiate(); Pkg.precompile()"
-
-USER root
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends build-essential && \
-        apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_USER}
 
