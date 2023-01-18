@@ -49,4 +49,3 @@ RUN julia --project=${USER_HOME_DIR} -e "import Pkg; Pkg.Registry.update(); Pkg.
 
 RUN julia --project=${USER_HOME_DIR} create_sysimage.jl
 RUN julia -J${USER_HOME_DIR}/sysimage.so --project=${USER_HOME_DIR} -e "import Pkg; Pkg.precompile()"
-RUN julia --project=${USER_HOME_DIR} -e "import Pkg; Pkg.precompile()"
