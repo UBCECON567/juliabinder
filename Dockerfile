@@ -1,10 +1,10 @@
 FROM jupyter/base-notebook:latest
 
-# downgrade jupyter-server
-USER root
+## downgrade jupyter-server
+#USER root
 
-RUN pip install --no-cache --upgrade pip && \
-    pip install --no-cache jupyter-server 'jupyter-server<2.0.0'
+#RUN pip install --no-cache --upgrade pip && \
+#    pip install --no-cache jupyter-server 'jupyter-server<2.0.0'
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget && \
@@ -24,11 +24,13 @@ COPY --chown=${NB_USER}:users ./Manifest.toml ./Manifest.toml
 COPY --chown=${NB_USER}:users ./combined_trace.jl ./combined_trace.jl
 COPY --chown=${NB_USER}:users ./create_sysimage.jl ./create_sysimage.jl
 
-RUN jupyter labextension install @jupyterlab/server-proxy && \
-    jupyter lab build && \
-    jupyter lab clean && \
-    pip install . --no-cache-dir && \
-    rm -rf ~/.cache
+RUN pip install jupyter-server-proxy
+
+#RUN jupyter labextension install @jupyterlab/server-proxy && \
+#    jupyter lab build && \
+#    jupyter lab clean && \
+#    pip install . --no-cache-dir && \
+#    rm -rf ~/.cache
 
 USER root
 
