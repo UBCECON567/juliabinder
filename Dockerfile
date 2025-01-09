@@ -1,11 +1,11 @@
 FROM jupyter/base-notebook:latest
 
+USER root
 ## downgrade jupyter-server
-#USER root
-
 #RUN pip install --no-cache --upgrade pip && \
 #    pip install --no-cache jupyter-server 'jupyter-server<2.0.0'
 
+## update and install needed packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget && \
     apt-get install -y --no-install-recommends build-essential && \
