@@ -34,11 +34,11 @@ RUN pip install jupyter-server-proxy
 
 USER root
 
-RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.11/julia-1.11.2-linux-x86_64.tar.gz && \
-    tar -xvzf julia-1.11.2-linux-x86_64.tar.gz && \
-    mv julia-1.11.2 /opt/ && \
-    ln -s /opt/julia-1.11.2/bin/julia /usr/local/bin/julia && \
-    rm julia-1.11.2-linux-x86_64.tar.gz
+RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.12/julia-1.12.3-linux-x86_64.tar.gz && \
+    tar -xvzf julia-1.12.3-linux-x86_64.tar.gz && \
+    mv julia-1.12.3 /opt/ && \
+    ln -s /opt/julia-1.12.3/bin/julia /usr/local/bin/julia && \
+    rm julia-1.12.3-linux-x86_64.tar.gz
 
 USER ${NB_USER}
 
